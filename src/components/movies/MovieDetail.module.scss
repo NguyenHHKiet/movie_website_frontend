@@ -1,0 +1,13 @@
+.showcase {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    .header-line {
+        border-bottom: 0.25rem solid white;
+        padding-bottom: 1.5rem;
+    }
+    .teaser {
+        display: flex;
+        justify-content: center;
+    }
+}
