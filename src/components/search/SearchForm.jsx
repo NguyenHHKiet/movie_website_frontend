@@ -7,7 +7,8 @@ const SearchForm = ({ setText }) => {
 
     const searchHandler = (event) => {
         event.preventDefault();
-        setText(search);
+        // Remove leading and trailing spaces in JavaScript strings
+        setText(search.trim());
     };
 
     const resetSearch = () => setSearch("");
