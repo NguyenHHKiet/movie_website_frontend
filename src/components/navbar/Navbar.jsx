@@ -1,12 +1,14 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "../search/SearchIcon";
 
 import classes from "./Navbar.module.scss";
 
 const Navbar = () => {
+    const navigate = useNavigate();
     // next page handler
     function onClickHandler() {
-        window.location.replace("/");
+        navigate("/");
     }
 
     useEffect(() => {

@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 const SearchIcon = () => {
+    const navigate = useNavigate();
     const searchHandler = () => {
-        window.location.replace("/search");
+        navigate("/search");
     };
     return (
         <svg
