@@ -51,9 +51,11 @@
 .invalid {
     background-color: gray !important;
     transition: all 0.5s;
+    cursor: no-drop;
 }
 
 .valid {
     background-color: aqua !important;
     transition: all 0.5s;
+    cursor: pointer;
 }

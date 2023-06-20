@@ -17,6 +17,7 @@ const Search = () => {
 
     const { error, isLoading, sendRequest } = useHTTP();
 
+    // check keyword don't empty
     const checkContent = text.trim() !== "";
 
     useEffect(() => {
@@ -35,7 +36,7 @@ const Search = () => {
     return (
         <Fragment>
             {popUp && <MovieDetail movie={detail} onClose={hidePopUpHandler} />}
-            <Navbar modal={true} />
+            <Navbar />
             <div className="app relative top-20">
                 <SearchForm setText={setText} />
                 <h2 className="py-2">Result List</h2>

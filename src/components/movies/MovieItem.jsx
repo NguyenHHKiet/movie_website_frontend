@@ -13,11 +13,10 @@ const MovieItem = ({ movie, frame = 1, onShowDetail, setMovieDetail }) => {
     };
 
     return (
-        <div style={{ width: frame !== 0 ? "16rem" : "12rem" }}>
+        <div style={{ width: frame !== 0 ? "20rem" : "12rem" }}>
             <img
                 onClick={onClickHandler}
                 className={classes["movie-item"]}
-                style={{ width: "100%" }}
                 src={url}
                 alt="image"
                 loading="lazy"

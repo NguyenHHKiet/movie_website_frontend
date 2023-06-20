@@ -3,23 +3,22 @@ import { useState } from "react";
 import classes from "./SearchForm.module.scss";
 
 const SearchForm = ({ setText }) => {
-    const [search, setSearch] = useState("");
+    const [enteredSearch, setEnteredSearch] = useState("");
 
     const searchHandler = (event) => {
         event.preventDefault();
         // Remove leading and trailing spaces in JavaScript strings
-        setText(search.trim());
+        setText(enteredSearch.trim());
     };
 
-    const resetSearch = () => setSearch("");
+    const resetSearch = () => setEnteredSearch("");
 
-    const onChangeHandler = (e) => setSearch(e.target.value);
+    const onChangeHandler = (e) => setEnteredSearch(e.target.value);
 
     // check-in search tool is available
-    const checkInput = (search) => (search.trim().length === 0 ? false : true);
-
+    const checkInput = (search) => (search.trim().length === 0 ? true : false);
     // styled button
-    const styled = checkInput(search) ? classes.valid : classes.invalid;
+    const styled = checkInput(enteredSearch) ? classes.invalid : classes.valid;
 
     return (
         <div className={classes.showcase}>
@@ -28,16 +27,19 @@ const SearchForm = ({ setText }) => {
                     type="search"
                     name="search"
                     placeholder="Search"
-                    value={search}
+                    value={enteredSearch}
                     onChange={onChangeHandler}
                 />
                 <div className={classes.button}>
-                    <button type="button" onClick={resetSearch}>
+                    <button
+                        type="button"
+                        onClick={resetSearch}
+                        style={{ cursor: "pointer" }}>
                         Reset
                     </button>
                     <button
                         type="submit"
-                        disabled={checkInput}
+                        disabled={checkInput(enteredSearch)}
                         className={styled}>
                         Search
                     </button>

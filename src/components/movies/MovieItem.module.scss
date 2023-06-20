@@ -1,11 +1,12 @@
 img.movie-item {
-    width: 12rem;
+    width: 100%;
     // aspectRatio: "8/16";
     object-fit: "cover";
+    cursor: pointer;
     &:hover {
         position: relative;
         transition: all 0.4s ease;
         transform: scale(1.1);
-        z-index: 10000;
+        z-index: 10;
     }
 }

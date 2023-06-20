@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
+import Banner from "../../components/banner/Banner";
 import { hosting, requests } from "../../utils/API";
 import useHTTP from "../../hooks/use-http";
 import Movies from "../../components/movies/Movies";
@@ -27,7 +28,8 @@ function Browse() {
                 )
                 .sort((a, b) => a.id - b.id);
             setMovies(uniqueArr);
-            setFlag(true);
+            // find fetchNetflixOriginals for banner
+            if (uniqueArr[0].key === "fetchNetflixOriginals") setFlag(true);
         };
         // call multiple api
         for (const key in requests) {
@@ -78,38 +80,43 @@ function Browse() {
     const showPopUpHandler = () => setPopUp(true);
     const hidePopUpHandler = () => setPopUp(false);
 
+    const headerContent = flag ? (
+        <Fragment>
+            <Navbar />
+            <Banner
+                image={movies[0].movie}
+                error={error}
+                isLoading={isLoading}
+            />
+        </Fragment>
+    ) : (
+        <p>Loading......</p>
+    );
+
+    const mainContent = isLoading ? (
+        <p>Loading......</p>
+    ) : (
+        movies.map((item, index) => (
+            <Fragment key={item.key}>
+                <HeaderTitle item={item.title} />
+                <Movies
+                    key={item.key}
+                    movies={item.movie}
+                    error={error}
+                    isLoading={isLoading}
+                    frame={index}
+                    onShowDetail={showPopUpHandler}
+                    setMovieDetail={setDetail}
+                />
+            </Fragment>
+        ))
+    );
+
     return (
         <Fragment>
             {popUp && <MovieDetail movie={detail} onClose={hidePopUpHandler} />}
-            {flag ? (
-                <Navbar
-                    image={movies[0].movie}
-                    error={error}
-                    isLoading={isLoading}
-                />
-            ) : (
-                <p>Loading......</p>
-            )}
-            <div className="app">
-                {isLoading ? (
-                    <p>Loading......</p>
-                ) : (
-                    movies.map((item, index) => (
-                        <>
-                            <HeaderTitle item={item.title} />
-                            <Movies
-                                key={item.key}
-                                movies={item.movie}
-                                error={error}
-                                isLoading={isLoading}
-                                frame={index}
-                                onShowDetail={showPopUpHandler}
-                                setMovieDetail={setDetail}
-                            />
-                        </>
-                    ))
-                )}
-            </div>
+            <header>{headerContent}</header>
+            <main className="app">{mainContent}</main>
         </Fragment>
     );
 }
