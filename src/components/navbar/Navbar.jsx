@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from "react";
+import { Fragment, useEffect, useMemo } from "react";
 import SearchIcon from "../search/SearchIcon";
 import { hostImage } from "../../utils/API";
 import Banner from "../banner/Banner";
@@ -25,15 +25,29 @@ const Navbar = ({
         window.location.replace("/");
     }
 
-    // effect scrolling
-    window.addEventListener("scroll", () => {
-        const navbarHeight = document.querySelector(".header-navbar");
-        if (window.scrollY > 100) {
-            navbarHeight.classList.add(`${classes["header-scrolled"]}`);
-        } else if (window.scrollY <= 100) {
-            navbarHeight.classList.remove(`${classes["header-scrolled"]}`);
-        }
-    });
+    useEffect(() => {
+        // effect scrolling
+        const handleScroller = () => {
+            const navbarHeight = document.querySelector(".header-navbar");
+            if (window.scrollY > 100) {
+                navbarHeight.classList.add(`${classes["header-scrolled"]}`);
+            } else if (window.scrollY <= 100) {
+                navbarHeight.classList.remove(`${classes["header-scrolled"]}`);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroller);
+        console.log("addScrollListener");
+
+        return () => {
+            window.removeEventListener("scroll", handleScroller);
+            console.log("removeScrollListener");
+        };
+    }, []);
+
+    // 1. Add the event listener in the useEffect hook.
+    // 2. Return a function from the useEffect hook.
+    // 3. Use the removeEventListener method to remove the event listener when the component unmounts.
 
     if (error) {
         return error;
@@ -53,8 +67,12 @@ const Navbar = ({
     let brief = "";
     if (overview.length > 300) {
         brief = overview.substring(0, 300) + " .......";
+    } else {
+        brief = overview;
     }
 
+    // should be splitting banner and navbar to be 2 components
+    // do not interlocking in navbar
     return (
         <Fragment>
             {isLoading ? (

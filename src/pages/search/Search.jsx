@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import SearchForm from "../../components/search/SearchForm";
 import ResultList from "../../components/search/ResultList";
@@ -17,7 +17,7 @@ const Search = () => {
 
     const { error, isLoading, sendRequest } = useHTTP();
 
-    const checkContent = text.trim().length !== 0;
+    const checkContent = text.trim() !== "";
 
     useEffect(() => {
         if (checkContent) {

@@ -29,7 +29,6 @@ const MovieDetail = ({ onClose, movie }) => {
                 (item.type === "Trailer" || item.type === "Teaser")
             ) {
                 key = item.key;
-                console.log(item);
                 break;
             }
         }
