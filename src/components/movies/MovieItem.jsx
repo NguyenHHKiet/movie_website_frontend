@@ -7,6 +7,7 @@ const MovieItem = ({ movie, frame = 1, onShowDetail, setMovieDetail }) => {
         frame === 0 ? movie.poster_path : movie.backdrop_path
     }`;
 
+    // take information to detail from item
     const onClickHandler = () => {
         onShowDetail();
         setMovieDetail(movie);

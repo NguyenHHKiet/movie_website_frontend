@@ -18,6 +18,7 @@ const ModalOverlay = (props) => {
     );
 };
 
+// Modal Component is using the default modal for the popup
 const Modal = ({ children, onClose }) => {
     return (
         <Fragment>
