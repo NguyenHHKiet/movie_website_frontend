@@ -41,8 +41,8 @@ Make sure you have the following installed on your machine:
 
 Install the project dependencies using npm:
 
-```javascript
-yarn;
+```base
+yarn
 ```
 
 **Running the Project**
