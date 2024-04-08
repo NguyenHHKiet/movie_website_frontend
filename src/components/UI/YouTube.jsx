@@ -6,7 +6,8 @@ const YouTube = ({ videoId }) => {
             width="100%"
             height="400"
             loading="lazy"
-            src={`https://www.youtube.com/embed/${videoId}`}></iframe>
+            src={`https://www.youtube.com/embed/${videoId}`}
+        ></iframe>
     );
 };
 

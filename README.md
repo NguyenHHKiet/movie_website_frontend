@@ -19,16 +19,15 @@ Movie App, an unlimited entertainment experience, opens your doors to the divers
 
 Project Overview:
 
-- Register and get an API Token
-- Create Nav Bar
-- Get data from the API
-- Display Banners
-- Displays a list of movies by category
-- Displays movie-specific information
-- Create Search interface
-- Logical processing when searching for movies
-- Displays specific information about the found movie
-
+-   Register and get an API Token
+-   Create Nav Bar
+-   Get data from the API
+-   Display Banners
+-   Displays a list of movies by category
+-   Displays movie-specific information
+-   Create Search interface
+-   Logical processing when searching for movies
+-   Displays specific information about the found movie
 
 ## Features
 

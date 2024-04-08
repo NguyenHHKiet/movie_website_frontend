@@ -8,20 +8,22 @@ const Banner = ({ image, error, isLoading }) => {
         return Math.floor(Math.random() * image.results.length - 1);
     }, [image]);
 
-    const { backdrop_path, original_name, overview } = image.results[numRandom]
-        ? image.results[numRandom]
-        : {};
+    const {
+        backdrop_path: backdropPath,
+        original_name: originalName,
+        overview,
+    } = image.results[numRandom] ? image.results[numRandom] : {};
 
     // slice overview content to brief
-    let content = "No found background of banner",
-        brief = "";
+    let content = "No found background of banner";
+    let brief = "";
     if (overview.length > 300) {
         brief = overview.substring(0, 300) + " .......";
     } else {
         brief = overview;
     }
 
-    const url = `${hostImage}${backdrop_path}`;
+    const url = `${hostImage}${backdropPath}`;
 
     if (error) {
         return error;
@@ -35,9 +37,10 @@ const Banner = ({ image, error, isLoading }) => {
                 className={classes.showcase}
                 style={{
                     background: `url(${url}) no-repeat center center/cover`,
-                }}>
+                }}
+            >
                 <div className="app">
-                    <h1>{original_name}</h1>
+                    <h1>{originalName}</h1>
                     <button>Play</button>
                     <button>My List</button>
                     <p>{brief}</p>

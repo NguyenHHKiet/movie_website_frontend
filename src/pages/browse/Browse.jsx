@@ -18,13 +18,13 @@ function Browse() {
 
     useEffect(() => {
         // transform data into
-        let temp = [];
+        const temp = [];
         const transformData = (key, movie) => {
             temp.push({ ...SubTitleUl(key), key, movie });
             const uniqueArr = temp
                 .filter(
                     (obj, index, self) =>
-                        index === self.findIndex((t) => t?.id === obj?.id)
+                        index === self.findIndex((t) => t?.id === obj?.id),
                 )
                 .sort((a, b) => a.id - b.id);
             setMovies(uniqueArr);
@@ -38,7 +38,7 @@ function Browse() {
                     const element = requests[key];
                     fetchMovies(
                         { url: `${hosting}${element}` },
-                        transformData.bind(null, key)
+                        transformData.bind(null, key),
                     );
                 }
             }

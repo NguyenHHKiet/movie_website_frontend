@@ -24,7 +24,7 @@ const Search = () => {
         if (checkContent) {
             sendRequest(
                 { url: `${hosting}${requests.fetchSearch}&query=${text}` },
-                setResult
+                setResult,
             );
         }
     }, [sendRequest, text, checkContent]);

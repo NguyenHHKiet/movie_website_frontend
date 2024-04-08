@@ -27,7 +27,8 @@ const ResultList = ({
                     display: "flex",
                     flexWrap: "wrap",
                     gap: "1rem",
-                }}>
+                }}
+            >
                 {result.results.map((item) => (
                     <MovieItem
                         key={item.id}

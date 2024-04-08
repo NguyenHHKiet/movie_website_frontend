@@ -16,7 +16,7 @@ const SearchForm = ({ setText }) => {
     const onChangeHandler = (e) => setEnteredSearch(e.target.value);
 
     // check-in search tool is available
-    const checkInput = (search) => (search.trim().length === 0 ? true : false);
+    const checkInput = (search) => search.trim().length === 0;
     // styled button
     const styled = checkInput(enteredSearch) ? classes.invalid : classes.valid;
 
@@ -34,13 +34,15 @@ const SearchForm = ({ setText }) => {
                     <button
                         type="button"
                         onClick={resetSearch}
-                        style={{ cursor: "pointer" }}>
+                        style={{ cursor: "pointer" }}
+                    >
                         Reset
                     </button>
                     <button
                         type="submit"
                         disabled={checkInput(enteredSearch)}
-                        className={styled}>
+                        className={styled}
+                    >
                         Search
                     </button>
                 </div>

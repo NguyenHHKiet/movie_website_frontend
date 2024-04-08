@@ -29,7 +29,8 @@ const Movies = ({
                 //     },
                 // }}
                 scrollbar={{ draggable: true }}
-                direction={"horizontal"}>
+                direction={"horizontal"}
+            >
                 {movies?.results.map((movie) => (
                     <SwiperSlide key={movie.original_title}>
                         <MovieItem

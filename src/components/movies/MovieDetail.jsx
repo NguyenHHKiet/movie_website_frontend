@@ -18,7 +18,7 @@ const MovieDetail = ({ onClose, movie }) => {
             {
                 url: `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${API_KEY}&&language=en-US`,
             },
-            setDetail
+            setDetail,
         );
     }, [sendRequest, movie.id]);
 
