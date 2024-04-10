@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import Button from "../../UI/button/Button";
 import classes from "./SearchForm.module.scss";
 
 const SearchForm = ({ setText }) => {
@@ -31,20 +32,20 @@ const SearchForm = ({ setText }) => {
                     onChange={onChangeHandler}
                 />
                 <div className={classes.button}>
-                    <button
+                    <Button
                         type="button"
                         onClick={resetSearch}
                         style={{ cursor: "pointer" }}
                     >
                         Reset
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         type="submit"
                         disabled={checkInput(enteredSearch)}
                         className={styled}
                     >
                         Search
-                    </button>
+                    </Button>
                 </div>
             </form>
         </div>

@@ -1,4 +1,4 @@
-const API_KEY = "914e7df8a6341ac66d62a9b09aefd101";
+const API_KEY = import.meta.env.VITE_API_KEY;
 const hosting = "https://api.themoviedb.org/3";
 const hostImage = "https://image.tmdb.org/t/p/original";
 const requests = {
@@ -13,4 +13,15 @@ const requests = {
     fetchSearch: `/search/movie?api_key=${API_KEY}&language=en-US`,
 };
 
-export { hostImage, hosting, requests, API_KEY };
+const urls = [];
+// call multiple api
+for (const key in requests) {
+    if (Object.hasOwnProperty.call(requests, key)) {
+        if (key !== "fetchSearch") {
+            const element = requests[key];
+            urls.push(`${hosting}${element}`);
+        }
+    }
+}
+
+export { hostImage, hosting, requests, urls };

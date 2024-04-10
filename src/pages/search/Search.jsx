@@ -1,11 +1,10 @@
 import { Fragment, useEffect, useState } from "react";
-import Navbar from "../../components/navbar/Navbar";
-import SearchForm from "../../components/search/SearchForm";
+import SearchForm from "../../components/search/form/SearchForm";
 import ResultList from "../../components/search/ResultList";
 import MovieDetail from "../../components/movies/MovieDetail";
 
-import useHTTP from "../../hooks/use-http";
-import { hosting, requests } from "../../utils/API";
+import useFetch from "../../hooks/useFetch";
+import { hosting, requests } from "../../api/API";
 
 const Search = () => {
     const [text, setText] = useState("");
@@ -15,7 +14,7 @@ const Search = () => {
     const [detail, setDetail] = useState(null);
     const [popUp, setPopUp] = useState(false);
 
-    const { error, isLoading, sendRequest } = useHTTP();
+    const { error, isLoading, sendRequest } = useFetch();
 
     // check keyword don't empty
     const checkContent = text.trim() !== "";
@@ -33,21 +32,28 @@ const Search = () => {
     const showPopUpHandler = () => setPopUp(true);
     const hidePopUpHandler = () => setPopUp(false);
 
+    const contentResultList = result ? (
+        <ResultList
+            result={result}
+            isLoading={isLoading}
+            error={error}
+            check={checkContent}
+            onShowDetail={showPopUpHandler}
+            setMovieDetail={setDetail}
+        />
+    ) : (
+        <div className="w-full" style={{ height: "70vh" }}></div>
+    );
+
     return (
         <Fragment>
             {popUp && <MovieDetail movie={detail} onClose={hidePopUpHandler} />}
-            <Navbar />
-            <div className="app relative top-20">
-                <SearchForm setText={setText} />
-                <h2 className="py-2">Result List</h2>
-                <ResultList
-                    result={result}
-                    isLoading={isLoading}
-                    error={error}
-                    check={checkContent}
-                    onShowDetail={showPopUpHandler}
-                    setMovieDetail={setDetail}
-                />
+            <div className="container">
+                <div className="pt-20">
+                    <SearchForm setText={setText} />
+                    <h2 className="py-2">Result List</h2>
+                    {contentResultList}
+                </div>
             </div>
         </Fragment>
     );

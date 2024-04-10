@@ -1,5 +1,5 @@
 import React from "react";
-import { hostImage } from "../../utils/API";
+import { hostImage } from "../../api/API";
 import classes from "./MovieItem.module.scss";
 
 const MovieItem = ({ movie, frame = 1, onShowDetail, setMovieDetail }) => {
@@ -14,7 +14,7 @@ const MovieItem = ({ movie, frame = 1, onShowDetail, setMovieDetail }) => {
     };
 
     return (
-        <div style={{ width: frame !== 0 ? "20rem" : "12rem" }}>
+        <div>
             <img
                 onClick={onClickHandler}
                 className={classes["movie-item"]}

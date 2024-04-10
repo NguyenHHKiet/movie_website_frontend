@@ -1,54 +1,11 @@
 .showcase {
-    width: 100%;
-    height: 80vh;
-    position: relative;
-    > * {
-        color: white;
-        font-weight: 500;
+    font-weight: 500;
+    h1 {
+        font-size: 3rem;
     }
-    > :last-child {
-        display: block;
-        position: absolute;
-        left: 0;
-        bottom: 10%;
-        width: 100%;
-        z-index: 2;
+    @media screen and (max-width: 768px) {
         h1 {
-            font-size: 3rem;
-        }
-        p {
-            width: 30%;
-        }
-        @media screen and (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            p {
-                width: 50%;
-            }
+            font-size: 2rem;
         }
     }
-    button {
-        padding: 0.75rem 1.5rem;
-        background: transparentize(#494e55, 0.4);
-        border: none;
-        border-radius: 0.25rem;
-        margin-right: 1rem;
-        color: white;
-        font-size: medium;
-        cursor: pointer;
-    }
-}
-
-.showcase::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    // background: rgba(77, 75, 75, 0.6);
-    box-shadow: inset 120px 0px 250px transparentize(#000000, 0.4),
-        inset -120px 0px 250px transparentize(#000000, 0.4);
 }

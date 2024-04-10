@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import MovieItem from "./MovieItem";
+import Card from "../UI/card/Card";
 
 const Movies = ({
     movies,
@@ -19,26 +20,23 @@ const Movies = ({
     if (movies?.results?.length > 0) {
         movieList = (
             <Swiper
-                className="py-2"
+                className="pb-10 pt-8 px-8"
                 modules={[Scrollbar, A11y]}
                 spaceBetween={10}
                 slidesPerView={"auto"}
-                // breakpoints={{
-                //     768: {
-                //         slidesPerView: frame === 0 ? 10 : 5,
-                //     },
-                // }}
                 scrollbar={{ draggable: true }}
                 direction={"horizontal"}
             >
                 {movies?.results.map((movie) => (
                     <SwiperSlide key={movie.original_title}>
-                        <MovieItem
-                            movie={movie}
-                            frame={frame}
-                            onShowDetail={onShowDetail}
-                            setMovieDetail={setMovieDetail}
-                        />
+                        <Card frame={frame}>
+                            <MovieItem
+                                movie={movie}
+                                frame={frame}
+                                onShowDetail={onShowDetail}
+                                setMovieDetail={setMovieDetail}
+                            />
+                        </Card>
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -55,7 +53,7 @@ const Movies = ({
         content = "Loading movies...";
     }
 
-    return <div className="py-2">{content}</div>;
+    return <div>{content}</div>;
 };
 
 export default Movies;

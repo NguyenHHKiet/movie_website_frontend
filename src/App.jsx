@@ -1,18 +1,24 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Browse from "./pages/browse/Browse";
 import Search from "./pages/search/Search";
+import ErrorPage from "./utils/errorPage";
+import Root from "./layout/root";
 
-function App() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Browse />} />
-                <Route path="/search" element={<Search />} />
-            </Routes>
-        </BrowserRouter>
-    );
-}
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Root />,
+        errorElement: <ErrorPage />,
+        children: [
+            { index: true, element: <Browse /> },
+            { path: "search", element: <Search /> },
+        ],
+    },
+]);
+
+const App = () => {
+    return <RouterProvider router={router} />;
+};
 
 export default App;

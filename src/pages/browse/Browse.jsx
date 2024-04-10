@@ -1,35 +1,28 @@
 import { Fragment, useEffect, useState } from "react";
-import Navbar from "../../components/navbar/Navbar";
 import Banner from "../../components/banner/Banner";
-import { hosting, requests } from "../../utils/API";
-import useHTTP from "../../hooks/use-http";
 import Movies from "../../components/movies/Movies";
 import MovieDetail from "../../components/movies/MovieDetail";
+import SkeletalMovie from "../../components/UI/skeleton/MovieItem";
+
+import { hosting, requests } from "../../api/API";
+
+import useFetch from "../../hooks/useFetch";
 
 function Browse() {
     const [movies, setMovies] = useState([]);
-    const [flag, setFlag] = useState(false);
-
     const [detail, setDetail] = useState(null);
     const [popUp, setPopUp] = useState(false);
 
     // custom Hook for
-    const { isLoading, error, sendRequest: fetchMovies } = useHTTP();
+    const { isLoading, error, sendRequest: fetchMovies } = useFetch();
 
     useEffect(() => {
         // transform data into
         const temp = [];
         const transformData = (key, movie) => {
-            temp.push({ ...SubTitleUl(key), key, movie });
-            const uniqueArr = temp
-                .filter(
-                    (obj, index, self) =>
-                        index === self.findIndex((t) => t?.id === obj?.id),
-                )
-                .sort((a, b) => a.id - b.id);
+            temp.push({ ...SubTitleUl[key], key, movie });
+            const uniqueArr = temp.sort((a, b) => a.id - b.id);
             setMovies(uniqueArr);
-            // find fetchNetflixOriginals for banner
-            if (uniqueArr[0].key === "fetchNetflixOriginals") setFlag(true);
         };
         // call multiple api
         for (const key in requests) {
@@ -46,32 +39,20 @@ function Browse() {
     }, [fetchMovies]);
 
     // custom transform object for rendering
-    function SubTitleUl(title) {
-        switch (title) {
-            case "fetchNetflixOriginals":
-                return { id: 0, title: "Original" };
-            case "fetchTrending":
-                return { id: 1, title: "Xu hướng" };
-            case "fetchTopRated":
-                return { id: 2, title: "Xếp hạng cao" };
-            case "fetchActionMovies":
-                return { id: 3, title: "Hành động" };
-            case "fetchComedyMovies":
-                return { id: 4, title: "Hài" };
-            case "fetchHorrorMovies":
-                return { id: 5, title: "Kinh dị" };
-            case "fetchRomanceMovies":
-                return { id: 6, title: "Lãng mạn" };
-            case "fetchDocumentaries":
-                return { id: 7, title: "Tài liệu" };
-            default:
-                break;
-        }
-    }
+    const SubTitleUl = {
+        fetchNetflixOriginals: { id: 0, title: "Original" },
+        fetchTrending: { id: 1, title: "Xu hướng" },
+        fetchTopRated: { id: 2, title: "Xếp hạng cao" },
+        fetchActionMovies: { id: 3, title: "Hành động" },
+        fetchComedyMovies: { id: 4, title: "Hài" },
+        fetchHorrorMovies: { id: 5, title: "Kinh dị" },
+        fetchRomanceMovies: { id: 6, title: "Lãng mạn" },
+        fetchDocumentaries: { id: 7, title: "Tài liệu" },
+    };
 
     const HeaderTitle = ({ item }) =>
         item.trim() !== "Original" ? (
-            <h1 style={{ marginBottom: "0" }}>{item}</h1>
+            <h1 className="container">{item}</h1>
         ) : (
             <></>
         );
@@ -80,24 +61,21 @@ function Browse() {
     const showPopUpHandler = () => setPopUp(true);
     const hidePopUpHandler = () => setPopUp(false);
 
-    const headerContent = flag ? (
-        <Fragment>
-            <Navbar />
-            <Banner
-                image={movies[0].movie}
-                error={error}
-                isLoading={isLoading}
-            />
-        </Fragment>
-    ) : (
-        <p>Loading......</p>
-    );
+    const headerContent =
+        !isLoading && movies[0]?.key ? (
+            <Fragment>
+                <Banner image={movies[0].movie} />
+            </Fragment>
+        ) : (
+            <div
+                style={{ width: "100%", height: "80vh" }}
+                className="animate-pulse bg-slate-900"
+            ></div>
+        );
 
-    const mainContent = isLoading ? (
-        <p>Loading......</p>
-    ) : (
+    const mainContent = !isLoading ? (
         movies.map((item, index) => (
-            <Fragment key={item.key}>
+            <div key={item.key} className="my-4">
                 <HeaderTitle item={item.title} />
                 <Movies
                     key={item.key}
@@ -108,15 +86,19 @@ function Browse() {
                     onShowDetail={showPopUpHandler}
                     setMovieDetail={setDetail}
                 />
-            </Fragment>
+            </div>
         ))
+    ) : (
+        <div className="container my-4">
+            <SkeletalMovie />
+        </div>
     );
 
     return (
         <Fragment>
             {popUp && <MovieDetail movie={detail} onClose={hidePopUpHandler} />}
             <header>{headerContent}</header>
-            <main className="app">{mainContent}</main>
+            <main className="my-8">{mainContent}</main>
         </Fragment>
     );
 }

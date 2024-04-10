@@ -10,6 +10,8 @@ const SearchIcon = () => {
             onClick={searchHandler}
             style={{ cursor: "pointer" }}
             className="svg-inline--fa fa-search fa-w-16"
+            height="25"
+            width="25"
             fill="#ccc"
             aria-hidden="true"
             data-prefix="fas"

@@ -11,7 +11,11 @@ const ResultList = ({
     let content = "";
 
     if (!check) {
-        return "No Found Movies";
+        return (
+            <div className="w-full text-center" style={{ height: "70vh" }}>
+                No Found Movies
+            </div>
+        );
     }
 
     if (error) {
@@ -22,13 +26,7 @@ const ResultList = ({
         content = <p>Loading...</p>;
     } else {
         content = (
-            <div
-                style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: "1rem",
-                }}
-            >
+            <div className="grid sm:grid-cols-4 lg:grid-cols-6 gap-4 my-4">
                 {result.results.map((item) => (
                     <MovieItem
                         key={item.id}

@@ -34,9 +34,16 @@ const Navbar = () => {
     // 3. Use the removeEventListener method to remove the event listener when the component unmounts.
 
     return (
-        <nav className={`${classes["showcase-top"]} header-navbar app`}>
-            <h2 onClick={onClickHandler}>Movie App</h2>
-            <SearchIcon />
+        <nav className={`${classes.showcase} w-full z-10 fixed header-navbar`}>
+            <div className="container flex justify-between items-center h-24 ">
+                <h2
+                    className="text-red-500 cursor-pointer"
+                    onClick={onClickHandler}
+                >
+                    Movie App
+                </h2>
+                <SearchIcon />
+            </div>
         </nav>
     );
 };

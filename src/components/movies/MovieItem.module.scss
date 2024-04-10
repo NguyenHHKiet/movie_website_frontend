@@ -5,8 +5,12 @@ img.movie-item {
     cursor: pointer;
     &:hover {
         position: relative;
-        transition: all 0.4s ease;
-        transform: scale(1.1);
-        z-index: 10;
+        z-index: 100;
+        transition: transform 0.3s;
+        -ms-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        border-radius: 2px;
+        border: 1px solid white;
     }
 }
