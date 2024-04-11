@@ -19,7 +19,7 @@ const Banner = ({ image }) => {
     const url = `${hostImage}${backdropPath}`;
 
     const content = (
-        <div
+        <section
             className="w-full"
             style={{
                 background: `linear-gradient(to bottom, rgba(255, 0, 0, 0.1), rgba(0, 0, 0, 1)),
@@ -46,7 +46,7 @@ const Banner = ({ image }) => {
                     </p>
                 </div>
             </div>
-        </div>
+        </section>
     );
 
     // should be splitting banner and navbar to be 2 components

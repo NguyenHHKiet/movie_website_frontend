@@ -27,11 +27,11 @@ const Footer = () => {
                         Copyright @ 2024 Qliphort Shell Inc. All rights
                         reserved.
                     </p>
-                    <div className="flex">
+                    <div className="flex flex-wrap">
                         {footerLinks.map((link, i) => (
                             <p
                                 key={link}
-                                className="font-semibold text-gray text-xs"
+                                className="font-semibold text-gray text-xs whitespace-nowrap"
                             >
                                 {link}{" "}
                                 {i !== footerLinks.length - 1 && (

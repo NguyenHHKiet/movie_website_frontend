@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 import MovieItem from "./MovieItem";
 import Card from "../UI/card/Card";
+import { Fragment } from "react";
 
 const Movies = ({
     movies,
@@ -53,7 +54,7 @@ const Movies = ({
         content = "Loading movies...";
     }
 
-    return <div>{content}</div>;
+    return <Fragment>{content}</Fragment>;
 };
 
 export default Movies;
