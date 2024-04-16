@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { customAxios } from "../api/axios";
 
 const useHTTP = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -7,27 +8,21 @@ const useHTTP = () => {
     // call API method
     const sendRequest = useCallback(async (requestConfig, applyData) => {
         setIsLoading(true);
-        setError(null);
         try {
-            const response = await fetch(requestConfig.url, {
+            const { data } = await customAxios({
+                url: requestConfig.url,
                 method: requestConfig.method || "GET",
                 headers: requestConfig.headers || {},
-                body: requestConfig.body
-                    ? JSON.stringify(requestConfig.body)
-                    : null,
+                data: requestConfig.data || null,
             });
 
-            if (!response.ok) {
-                throw new Error("Invalid response");
-            }
-
-            const data = await response.json();
             // create new data object
             applyData(data);
         } catch (error) {
-            setError(error.message || "Something went wrong!!");
+            setError(error.message || "An error occurred");
+        } finally {
+            setIsLoading(false);
         }
-        setIsLoading(false);
     }, []);
     return { isLoading, error, sendRequest };
 };

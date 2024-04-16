@@ -1,4 +1,4 @@
-# MOVIE WEBSITE FRONTEND [Under Renovation]
+# MOVIE WEBSITE FRONTEND
 
 ![image](image.png)
 

@@ -4,7 +4,8 @@ import Movies from "../../components/movies/Movies";
 import MovieDetail from "../../components/movies/MovieDetail";
 import SkeletalMovie from "../../components/UI/skeleton/MovieItem";
 
-import { hosting, requests } from "../../api/API";
+import { requests } from "../../api/API";
+import { SubTitleUl } from "../../utils/subTitleUl";
 
 import useFetch from "../../hooks/useFetch";
 
@@ -28,9 +29,8 @@ function Browse() {
         for (const key in requests) {
             if (Object.hasOwnProperty.call(requests, key)) {
                 if (key !== "fetchSearch") {
-                    const element = requests[key];
                     fetchMovies(
-                        { url: `${hosting}${element}` },
+                        { url: requests[key] },
                         transformData.bind(null, key),
                     );
                 }
@@ -38,24 +38,8 @@ function Browse() {
         }
     }, [fetchMovies]);
 
-    // custom transform object for rendering
-    const SubTitleUl = {
-        fetchNetflixOriginals: { id: 0, title: "Original" },
-        fetchTrending: { id: 1, title: "Xu hướng" },
-        fetchTopRated: { id: 2, title: "Xếp hạng cao" },
-        fetchActionMovies: { id: 3, title: "Hành động" },
-        fetchComedyMovies: { id: 4, title: "Hài" },
-        fetchHorrorMovies: { id: 5, title: "Kinh dị" },
-        fetchRomanceMovies: { id: 6, title: "Lãng mạn" },
-        fetchDocumentaries: { id: 7, title: "Tài liệu" },
-    };
-
     const HeaderTitle = ({ item }) =>
-        item.trim() !== "Original" ? (
-            <h1 className="container">{item}</h1>
-        ) : (
-            <></>
-        );
+        item.trim() !== "Original" ? <h1>{item}</h1> : <></>;
 
     // show and hide about description detail
     const showPopUpHandler = () => setPopUp(true);
@@ -75,7 +59,7 @@ function Browse() {
 
     const mainContent = !isLoading ? (
         movies.map((item, index) => (
-            <div key={item.key} className="my-4">
+            <div key={item.key} className="my-4 container">
                 <HeaderTitle item={item.title} />
                 <Movies
                     key={item.key}

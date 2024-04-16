@@ -13,15 +13,4 @@ const requests = {
     fetchSearch: `/search/movie?api_key=${API_KEY}&language=en-US`,
 };
 
-const urls = [];
-// call multiple api
-for (const key in requests) {
-    if (Object.hasOwnProperty.call(requests, key)) {
-        if (key !== "fetchSearch") {
-            const element = requests[key];
-            urls.push(`${hosting}${element}`);
-        }
-    }
-}
-
-export { hostImage, hosting, requests, urls };
+export { hostImage, hosting, requests };

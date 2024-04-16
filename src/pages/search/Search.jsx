@@ -4,7 +4,7 @@ import ResultList from "../../components/search/ResultList";
 import MovieDetail from "../../components/movies/MovieDetail";
 
 import useFetch from "../../hooks/useFetch";
-import { hosting, requests } from "../../api/API";
+import { requests } from "../../api/API";
 
 const Search = () => {
     const [text, setText] = useState("");
@@ -22,7 +22,7 @@ const Search = () => {
     useEffect(() => {
         if (checkContent) {
             sendRequest(
-                { url: `${hosting}${requests.fetchSearch}&query=${text}` },
+                { url: `${requests.fetchSearch}&query=${text}` },
                 setResult,
             );
         }
